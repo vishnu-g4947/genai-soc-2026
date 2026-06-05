@@ -1,0 +1,6 @@
+CampusX_GenAI/
+
+**/venv/
+**/__pycache__/
+**/.env
+**/.gradio/
