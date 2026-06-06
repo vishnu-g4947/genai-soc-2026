@@ -1,7 +1,7 @@
 import gradio as gr
 import app
 
-def chat(selected_mode, user_prompt):
+def chat(selected_mode, user_prompt, temperature):
     system_prompt = app.PERSONAS[selected_mode]["system_prompt"]
     few_shot_examples = app.PERSONAS[selected_mode]["few_shot_examples"]
     output_format = app.PERSONAS[selected_mode]["output_format"]
@@ -11,7 +11,8 @@ def chat(selected_mode, user_prompt):
     response = app.client.chat.completions.create(
         model="llama-3.3-70b-versatile",
         messages = messages,
-        stream=True
+        stream=True,
+        temperature=temperature
     )   
 
     full_response=""
@@ -32,11 +33,20 @@ demo = gr.Interface(
                 "Code Reviewer",
                 "Creative Writer"
                 ],
-                label="Choose Mode"
+                label="Choose Mode",
+                value= "Technical Explainer"
         ),
-        gr.Textbox(label="Prompt")
+        gr.Textbox(label="Prompt",
+                   placeholder="Enter your prompt here..."),
+        gr.Slider(
+            minimum=0,
+            maximum=1.5,
+            value=0.7,
+            step=0.1,
+            label="Temperature"
+        )
     ],
-    outputs="text"
+    outputs=gr.Textbox(label="Response")
 )
 
 demo.launch()
