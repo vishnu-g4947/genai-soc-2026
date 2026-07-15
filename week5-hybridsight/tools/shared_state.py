@@ -1,0 +1,1 @@
+CURRENT_IMAGE_PATH = None
