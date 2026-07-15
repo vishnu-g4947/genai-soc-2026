@@ -1,0 +1,11 @@
+.env
+.venv/
+__pycache__/
+faiss_index/
+chatbot.db
+chatbot.db-shm
+chatbot.db-wal
+uploaded.pdf
+uploaded_image.png
+uploaded_image.jpg
+uploaded_image.jpeg
